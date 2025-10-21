@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портфолио - Главная</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <h1>Сецков Даниил</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Главная</a></li>
+                    <li><a href="pages/project.html">Проекты</a></li>
+                    <li><a href="pages/diary.html">Дневник</a></li>
+                    <li><a href="pages/contacts.html">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h2>Привет! Я студент</h2>
+                    <p class="group">группы ЭФБО-13-24</p>
+                    <p class="interests">Увлекаюсь веб-разработкой</p>
+                    <button class="download-btn" data-download-resume>
+                            📄 Скачать резюме
+                        </button>
+                </div>
+                <div class="hero-photo">
+                    <img src="images/qp.jpg" alt="Фото студента" class="student-photo">
+                </div>
+            </div>
+        </section>
+
+        <section class="skills">
+            <h2>Мои навыки</h2>
+            <div class="skill-item">
+                <span>HTML/CSS</span>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 90%"></div>
+                </div>
+                <span>90%</span>
+            </div>
+            <div class="skill-item">
+                <span>JavaScript</span>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 80%"></div>
+                </div>
+                <span>80%</span>
+            </div>
+            <div class="skill-item">
+                <span>Bootstrap</span>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 85%"></div>
+                </div>
+                <span>85%</span>
+            </div>
+            <div class="skill-item">
+                <span>React</span>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 60%"></div>
+                </div>
+                <span>60%</span>
+            </div>
+        </section>
+
+        <section class="projects-preview">
+            <h2>Лучшие проекты</h2>
+            <div class="projects-grid">
+                <div class="project-card" data-project="1">Личный сайт-портфолио</div>
+                <div class="project-card" data-project="2">Todo-приложение</div>
+                <div class="project-card" data-project="3">Интернет-магазин</div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Glaybyonest</p>
+    </footer>
+
+    <script src="scripts/download.js"></script>
+    <script src="scripts/projects-modal.js"></script>
+</body>
+</html>

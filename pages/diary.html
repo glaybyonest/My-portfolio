@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портфолио - Дневник</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <h1>Сецков Даниил</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Главная</a></li>
+                    <li><a href="project.html">Проекты</a></li>
+                    <li><a href="diary.html" class="active">Дневник</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="diary">
+            <h2>Мой учебный прогресс</h2>
+            <div class="progress-list">
+                <div class="progress-item completed">
+                    <span>15 окт - Верстка макета сайта</span>
+                    <span class="status">✓</span>
+                </div>
+                <div class="progress-item in-progress">
+                    <span>16 окт - JavaScript основы</span>
+                    <span class="status">in progress</span>
+                </div>
+                <div class="progress-item in-progress">
+                    <span>17 окт  - Работа с формами</span>
+                    <span class="status">in progress</span>
+                </div>
+                <div class="progress-item in-progress">
+                    <span>18 окт - Адаптивный дизайн</span>
+                    <span class="status">in progress</span>
+                </div>
+            </div>
+
+            <h2>Текущие курсы</h2>
+            <div class="courses">
+                <div class="course-item">
+                    <span>Веб-разработка</span>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                    <span>90%</span>
+                </div>
+                <div class="course-item">
+                    <span>JavaScript</span>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 70%"></div>
+                    </div>
+                    <span>70%</span>
+                </div>
+                <div class="course-item">
+                    <span>React</span>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 50%"></div>
+                    </div>
+                    <span>50%</span>
+                </div>
+            </div>
+
+            <button class="add-entry-btn">Добавить запись</button>
+        </section>
+    </main>
+
+    <script src="../scripts/diary.js"></script>
+    <footer>
+        <p>&copy; 2025 Glaybyonest</p>
+    </footer>
+</body>
+</html>
