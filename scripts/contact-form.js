@@ -28,18 +28,18 @@ class ContactForm {
     }
     
     initializeFields() {
-        this.fields = {
-            name: document.getElementById('name'),
-            email: document.getElementById('email'),
-            subject: document.getElementById('subject'),
-            message: document.getElementById('message'),
-            budget: document.getElementById('budget'),
-            newsletter: document.getElementById('newsletter')
-        };
-        
-        // Инициализируем счетчик символов
-        this.charCount = document.getElementById('char-count');
-    }
+    this.fields = {
+        name: document.getElementById('name'),
+        email: document.getElementById('email'),
+        subject: document.getElementById('subject'),
+        message: document.getElementById('message'),
+        budget: document.getElementById('budget'),
+        newsletter: document.getElementById('newsletter')
+    };
+    
+    // Инициализируем счетчик символов
+    this.charCount = document.getElementById('char-count');
+}
     
     setupEventListeners() {
         this.form.addEventListener('submit', (e) => this.handleSubmit(e));
