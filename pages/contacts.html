@@ -2,17 +2,20 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Контакты Сецкова Даниила для связи">
     <title>Портфолио - Контакты</title>
     <link rel="stylesheet" href="../styles/styles.css">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Перейти к основному содержимому</a>
+
     <header>
         <div class="header-content">
             <div class="logo">
                 <h1>Сецков Даниил</h1>
             </div>
-            <nav>
+            <nav aria-label="Основная навигация">
                 <ul>
                     <li><a href="../index.html">Главная</a></li>
                     <li><a href="project.html">Проекты</a></li>
@@ -23,37 +26,41 @@
         </div>
     </header>
 
-    <main>
+    <main id="main-content">
         <section class="contacts">
             <h2>Свяжитесь со мной</h2>
             
-           <form class="contact-form" id="contact-form">
-                    <div class="form-group">
-                        <label for="name">Имя:</label>
-                        <input type="text" id="name" name="name" required 
-                               placeholder="Введите ваше имя">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" required 
-                               placeholder="Введите ваш email">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">Сообщение:</label>
-                        <textarea id="message" name="message" rows="5" required 
-                                  placeholder="Введите ваше сообщение (минимум 10 символов)"></textarea>
-                    </div>
-                    
-                    <button type="submit" class="submit-btn">Отправить сообщение</button>
-                </form>
+            <form class="contact-form" id="contact-form" aria-labelledby="contact-heading">
+                <div class="form-group">
+                    <label for="name">Имя:</label>
+                    <input type="text" id="name" name="name" required 
+                           placeholder="Введите ваше имя"
+                           aria-required="true">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required 
+                           placeholder="Введите ваш email"
+                           aria-required="true">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Сообщение:</label>
+                    <textarea id="message" name="message" rows="5" required 
+                              placeholder="Введите ваше сообщение (минимум 10 символов)"
+                              aria-required="true"></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Отправить сообщение</button>
+            </form>
 
             <div class="contact-info">
                 <h3>Контакты:</h3>
                 <p>📧 setskov.d.a@edu.ru</p>
                 <p>📱 GitHub: <a href="https://github.com/glaybyonest" target="_blank" class="footer-github-link">Glaybyonest</a></p>
                 <p>📍 Москва, Россия</p>
+                <p>🕒 Время для связи: Пн-Пт 10:00-18:00</p>
             </div>
         </section>
     </main>

@@ -2,17 +2,20 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Проекты Сецкова Даниила - веб-разработчика">
     <title>Портфолио - Проекты</title>
     <link rel="stylesheet" href="../styles/styles.css">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Перейти к основному содержимому</a>
+
     <header>
         <div class="header-content">
             <div class="logo">
                 <h1>Сецков Даниил</h1>
             </div>
-            <nav>
+            <nav aria-label="Основная навигация">
                 <ul>
                     <li><a href="../index.html">Главная</a></li>
                     <li><a href="project.html" class="active">Проекты</a></li>
@@ -23,39 +26,49 @@
         </div>
     </header>
 
-    <main>
+    <main id="main-content">
         <section class="projects-header">
             <h2>Мои проекты</h2>
-            <div class="project-filters">
-                <button class="filter-btn active">Все</button>
-                <button class="filter-btn">HTML</button>
-                <button class="filter-btn">JS</button>
-                <button class="filter-btn">React</button>
+            <div class="project-filters" role="group" aria-label="Фильтры проектов">
+                <button class="filter-btn active" type="button">Все</button>
+                <button class="filter-btn" type="button">HTML</button>
+                <button class="filter-btn" type="button">JS</button>
+                <button class="filter-btn" type="button">React</button>
             </div>
         </section>
 
         <section class="projects-grid-full">
-            <div class="project-card-full">
+            <article class="project-card-full">
                 <h3>Личный сайт</h3>
-                <p>HTML, CSS</p>
-            </div>
-            <div class="project-card-full">
+                <p>HTML, CSS, JavaScript</p>
+            </article>
+            <article class="project-card-full">
                 <h3>Todo-приложение</h3>
-                <p>JavaScript</p>
-            </div>
-            <div class="project-card-full">
+                <p>JavaScript, Local Storage</p>
+            </article>
+            <article class="project-card-full">
                 <h3>Интернет-магазин</h3>
-                <p>React</p>
-            </div>
-            <div class="project-card-full">
+                <p>React, Node.js</p>
+            </article>
+            <article class="project-card-full">
                 <h3>Портфолио</h3>
-                <p>Bootstrap</p>
-            </div>
+                <p>Bootstrap, Responsive Design</p>
+            </article>
+            <article class="project-card-full">
+                <h3>Игра-пазл</h3>
+                <p>JavaScript, Canvas API</p>
+            </article>
+            <article class="project-card-full">
+                <h3>Погодное приложение</h3>
+                <p>React, API Integration</p>
+            </article>
         </section>
     </main>
 
     <footer>
         <p>&copy; 2025 Glaybyonest</p>
     </footer>
+
+    <script src="../scripts/projects-modal.js"></script>
 </body>
 </html>

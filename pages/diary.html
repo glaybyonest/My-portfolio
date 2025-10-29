@@ -2,17 +2,20 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Учебный дневник Сецкова Даниила">
     <title>Портфолио - Дневник</title>
     <link rel="stylesheet" href="../styles/styles.css">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Перейти к основному содержимому</a>
+
     <header>
         <div class="header-content">
             <div class="logo">
                 <h1>Сецков Даниил</h1>
             </div>
-            <nav>
+            <nav aria-label="Основная навигация">
                 <ul>
                     <li><a href="../index.html">Главная</a></li>
                     <li><a href="project.html">Проекты</a></li>
@@ -23,9 +26,10 @@
         </div>
     </header>
 
-    <main>
+    <main id="main-content">
         <section class="diary">
             <h2>Мой учебный прогресс</h2>
+            
             <div class="progress-list">
                 <div class="progress-item completed">
                     <span>15 окт - Верстка макета сайта</span>
@@ -36,12 +40,20 @@
                     <span class="status">in progress</span>
                 </div>
                 <div class="progress-item in-progress">
-                    <span>17 окт  - Работа с формами</span>
+                    <span>17 окт - Работа с формами</span>
                     <span class="status">in progress</span>
                 </div>
                 <div class="progress-item in-progress">
                     <span>18 окт - Адаптивный дизайн</span>
                     <span class="status">in progress</span>
+                </div>
+                <div class="progress-item">
+                    <span>19 окт - React компоненты</span>
+                    <span class="status">○</span>
+                </div>
+                <div class="progress-item">
+                    <span>20 окт - Node.js сервер</span>
+                    <span class="status">○</span>
                 </div>
             </div>
 
@@ -68,15 +80,23 @@
                     </div>
                     <span>50%</span>
                 </div>
+                <div class="course-item">
+                    <span>Базы данных</span>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 40%"></div>
+                    </div>
+                    <span>40%</span>
+                </div>
             </div>
 
-            <button class="add-entry-btn">Добавить запись</button>
+            <button class="add-entry-btn" type="button">Добавить запись</button>
         </section>
     </main>
 
-    <script src="../scripts/diary.js"></script>
     <footer>
         <p>&copy; 2025 Glaybyonest</p>
     </footer>
+
+    <script src="../scripts/diary.js"></script>
 </body>
 </html>

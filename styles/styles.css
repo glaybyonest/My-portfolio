@@ -1,7 +1,19 @@
+/* === БАЗОВЫЕ СТИЛИ И УЛУЧШЕНИЯ ИЗ ПРАКТИЧЕСКОГО ЗАНЯТИЯ === */
+:root {
+    color-scheme: light dark;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-2xl: 3rem;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
 }
 
 body {
@@ -9,7 +21,46 @@ body {
     line-height: 1.6;
     color: #333;
     background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    margin: 0;
 }
+
+/* Skip-link для доступности */
+.skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -100%;
+    z-index: 10000;
+    padding: .5rem .75rem;
+    background: #111;
+    color: #fff;
+    border-radius: .5rem;
+    text-decoration: none;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+    top: 1rem;
+}
+
+/* Видимый фокус */
+:focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: 2px;
+}
+
+a, button, input, textarea {
+    outline-offset: 2px;
+}
+
+/* Уважение к снижению движения */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* === ВАШИ ОРИГИНАЛЬНЫЕ СТИЛИ С УЛУЧШЕНИЯМИ === */
 
 /* Header */
 header {
@@ -17,6 +68,12 @@ header {
     box-shadow: 0 2px 10px rgba(220, 53, 69, 0.1);
     padding: 1rem 0;
     border-bottom: 3px solid #dc3545;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding-top: calc(1rem + env(safe-area-inset-top));
+    padding-left: calc(2rem + env(safe-area-inset-left));
+    padding-right: calc(2rem + env(safe-area-inset-right));
 }
 
 .header-content {
@@ -31,7 +88,7 @@ header {
 .logo h1 {
     color: #dc3545;
     font-weight: bold;
-    font-size: 1.8rem;
+    font-size: clamp(1.5rem, 1.1rem + 2vw, 1.8rem);
 }
 
 nav ul {
@@ -47,6 +104,9 @@ nav a {
     border-radius: 25px;
     transition: all 0.3s ease;
     font-weight: 500;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
 }
 
 nav a:hover {
@@ -65,7 +125,7 @@ nav a.active {
 main {
     max-width: 1200px;
     margin: 2rem auto;
-    padding: 0 2rem;
+    padding: 0 clamp(.75rem, .5rem + 1vw, 2rem);
 }
 
 /* Hero section */
@@ -86,14 +146,14 @@ main {
 }
 
 .hero-text h2 {
-    font-size: 2.2rem;
+    font-size: clamp(1.8rem, 1.4rem + 2vw, 2.5rem);
     margin-bottom: 1rem;
     color: #dc3545;
     font-weight: bold;
 }
 
 .group {
-    font-size: 1.3rem;
+    font-size: clamp(1.1rem, 0.9rem + 1vw, 1.5rem);
     color: #666;
     margin-bottom: 0.5rem;
     font-weight: 500;
@@ -106,7 +166,9 @@ main {
 }
 
 .download-btn {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
     color: white;
     padding: 1rem 2rem;
@@ -117,6 +179,7 @@ main {
     box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
     border: none;
     cursor: pointer;
+    min-height: 44px;
 }
 
 .download-btn:hover {
@@ -153,7 +216,7 @@ main {
 .skills h2 {
     margin-bottom: 2rem;
     color: #dc3545;
-    font-size: 1.8rem;
+    font-size: clamp(1.5rem, 1.1rem + 2vw, 1.8rem);
     text-align: center;
     font-weight: bold;
 }
@@ -203,19 +266,20 @@ main {
     border-radius: 15px;
     box-shadow: 0 8px 25px rgba(220, 53, 69, 0.1);
     border: 1px solid #ffeaea;
+    container-type: inline-size;
 }
 
 .projects-preview h2 {
     margin-bottom: 2rem;
     color: #dc3545;
-    font-size: 1.8rem;
+    font-size: clamp(1.5rem, 1.1rem + 2vw, 1.8rem);
     text-align: center;
     font-weight: bold;
 }
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
     gap: 1.5rem;
 }
 
@@ -227,16 +291,55 @@ main {
     align-items: center;
     justify-content: center;
     border-radius: 12px;
-    font-size: 1.4rem;
+    font-size: clamp(1.1rem, 0.9rem + 1vw, 1.4rem);
     font-weight: bold;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
     cursor: pointer;
+    min-width: 0;
+    position: relative;
+    overflow: hidden;
+    padding: 1rem;
+    text-align: center;
 }
 
 .project-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(220, 53, 69, 0.4);
+}
+
+.project-card:after {
+    content: "Нажмите для подробностей";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    font-size: 0.7rem;
+    padding: 0.3rem;
+    text-align: center;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover:after {
+    transform: translateY(0);
+}
+
+/* Контейнерные запросы для проектов */
+@supports (container-type: inline-size) {
+    @container (min-width: 640px) {
+        .projects-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    
+    @container (min-width: 960px) {
+        .projects-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
 }
 
 /* Projects page */
@@ -251,7 +354,7 @@ main {
 
 .projects-header h2 {
     color: #dc3545;
-    font-size: 1.8rem;
+    font-size: clamp(1.5rem, 1.1rem + 2vw, 1.8rem);
     font-weight: bold;
 }
 
@@ -262,7 +365,7 @@ main {
 }
 
 .filter-btn {
-    padding: 0.7rem 1.5rem;
+    padding: max(.5rem, calc((44px - 1em)/2)) 1.5rem;
     border: 2px solid #dc3545;
     background: white;
     color: #dc3545;
@@ -270,6 +373,9 @@ main {
     cursor: pointer;
     transition: all 0.3s ease;
     font-weight: 500;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
 }
 
 .filter-btn.active,
@@ -282,7 +388,7 @@ main {
 
 .projects-grid-full {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     gap: 2rem;
 }
 
@@ -294,6 +400,7 @@ main {
     text-align: center;
     transition: all 0.3s ease;
     border: 1px solid #ffeaea;
+    min-width: 0;
 }
 
 .project-card-full:hover {
@@ -324,7 +431,7 @@ main {
 .diary h2 {
     margin-bottom: 1.5rem;
     color: #dc3545;
-    font-size: 1.8rem;
+    font-size: clamp(1.5rem, 1.1rem + 2vw, 1.8rem);
     font-weight: bold;
 }
 
@@ -395,7 +502,7 @@ main {
 .add-entry-btn {
     background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
     color: white;
-    padding: 1rem 2.5rem;
+    padding: max(.5rem, calc((44px - 1em)/2)) 2.5rem;
     border: none;
     border-radius: 50px;
     cursor: pointer;
@@ -405,6 +512,9 @@ main {
     box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
     display: block;
     margin: 0 auto;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
 }
 
 .add-entry-btn:hover {
@@ -424,7 +534,7 @@ main {
 
 .contacts h2 {
     color: #dc3545;
-    font-size: 1.8rem;
+    font-size: clamp(1.5rem, 1.1rem + 2vw, 1.8rem);
     margin-bottom: 2rem;
     font-weight: bold;
     text-align: center;
@@ -470,7 +580,7 @@ main {
 .submit-btn {
     background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
     color: white;
-    padding: 1.2rem 2.5rem;
+    padding: max(.5rem, calc((44px - 1em)/2)) 2.5rem;
     border: none;
     border-radius: 50px;
     cursor: pointer;
@@ -479,6 +589,10 @@ main {
     font-weight: bold;
     box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
     width: 100%;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .submit-btn:hover {
@@ -517,6 +631,47 @@ footer {
     padding: 2rem 0;
     margin-top: 3rem;
     font-weight: 500;
+    padding-bottom: calc(2rem + env(safe-area-inset-bottom));
+}
+
+/* Стили для фото студента */
+.student-photo {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid white;
+    box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3);
+    transition: all 0.3s ease;
+}
+
+.student-photo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 35px rgba(220, 53, 69, 0.4);
+    border-color: #dc3545;
+}
+
+.hero-photo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Анимация появления фото */
+@keyframes photoAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.8) rotate(-5deg);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+}
+
+.student-photo {
+    animation: photoAppear 0.8s ease-out;
 }
 
 /* Responsive design */
@@ -568,9 +723,17 @@ footer {
         width: 100%;
     }
     
-    .photo-placeholder {
+    .student-photo {
         width: 180px;
         height: 180px;
+    }
+    
+    .hero,
+    .skills,
+    .projects-preview,
+    .diary,
+    .contacts {
+        padding: 1.5rem;
     }
 }
 
@@ -583,13 +746,6 @@ footer {
         padding: 2rem 1.5rem;
     }
     
-    .skills,
-    .projects-preview,
-    .diary,
-    .contacts {
-        padding: 1.5rem;
-    }
-    
     .hero-text h2 {
         font-size: 1.8rem;
     }
@@ -597,208 +753,7 @@ footer {
     .logo h1 {
         font-size: 1.5rem;
     }
-}
-/* Модальное окно */
-.modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 2000;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-}
-
-.modal-container {
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    max-width: 500px;
-    width: 100%;
-    transform: scale(0.7);
-    opacity: 0;
-    transition: all 0.3s ease;
-    overflow: hidden;
-}
-
-.modal-header {
-    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
-    color: white;
-    padding: 1.5rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.modal-title {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.modal-close {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 2rem;
-    cursor: pointer;
-    padding: 0;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: background-color 0.3s ease;
-}
-
-.modal-close:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.modal-body {
-    padding: 2rem;
-    line-height: 1.6;
-}
-
-.modal-body p {
-    margin-bottom: 1rem;
-}
-
-.modal-body p:last-child {
-    margin-bottom: 0;
-}
-
-.message-preview {
-    background: #f8f9fa;
-    padding: 1rem;
-    border-radius: 8px;
-    margin-top: 1rem;
-    border-left: 4px solid #dc3545;
-}
-
-.error-list {
-    margin: 1rem 0;
-    padding-left: 1.5rem;
-    color: #dc3545;
-}
-
-.error-list li {
-    margin-bottom: 0.5rem;
-}
-
-.modal-footer {
-    padding: 0 2rem 2rem;
-    text-align: center;
-}
-
-.modal-btn {
-    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
-    color: white;
-    border: none;
-    padding: 1rem 3rem;
-    border-radius: 50px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
-}
-
-.modal-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
-}
-
-/* Стили для спиннера загрузки */
-.loading-spinner {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    border: 2px solid #ffffff;
-    border-radius: 50%;
-    border-top-color: transparent;
-    animation: spin 1s ease-in-out infinite;
-    margin-right: 8px;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-/* Адаптивность для модального окна */
-@media (max-width: 576px) {
-    .modal-container {
-        margin: 1rem;
-        max-width: none;
-    }
     
-    .modal-header {
-        padding: 1rem 1.5rem;
-    }
-    
-    .modal-body {
-        padding: 1.5rem;
-    }
-    
-    .modal-footer {
-        padding: 0 1.5rem 1.5rem;
-    }
-    
-    .modal-title {
-        font-size: 1.3rem;
-    }
-}   
-/* Стили для фото студента */
-.student-photo {
-    width: 220px;
-    height: 220px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 5px solid white;
-    box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3);
-    transition: all 0.3s ease;
-}
-
-.student-photo:hover {
-    transform: scale(1.05);
-    box-shadow: 0 12px 35px rgba(220, 53, 69, 0.4);
-    border-color: #dc3545;
-}
-
-.hero-photo {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Резервный вариант если фото не загрузится */
-.student-photo:not([src]),
-.student-photo[src=""],
-.student-photo[src*="undefined"] {
-    display: none;
-}
-
-.student-photo:not([src]) + .photo-placeholder,
-.student-photo[src=""] + .photo-placeholder,
-.student-photo[src*="undefined"] + .photo-placeholder {
-    display: flex !important;
-}
-
-/* Адаптивность для фото */
-@media (max-width: 768px) {
-    .student-photo {
-        width: 180px;
-        height: 180px;
-    }
-}
-
-@media (max-width: 480px) {
     .student-photo {
         width: 150px;
         height: 150px;
@@ -806,227 +761,149 @@ footer {
     }
 }
 
-/* Анимация появления фото */
-@keyframes photoAppear {
-    from {
-        opacity: 0;
-        transform: scale(0.8) rotate(-5deg);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1) rotate(0);
+/* Крупные цели на устройствах с touch */
+@media (pointer: coarse) {
+    a, button, nav a {
+        min-height: 44px;
     }
 }
 
-.student-photo {
-    animation: photoAppear 0.8s ease-out;
+/* Повышенный контраст */
+@media (prefers-contrast: more) {
+    .download-btn,
+    .filter-btn,
+    .submit-btn,
+    .add-entry-btn {
+        box-shadow: inset 0 0 0 2px #fff;
+    }
 }
-/* Стили для модальных окон проектов */
-.project-modal-container {
-    max-width: 800px;
-    max-height: 90vh;
-    overflow-y: auto;
-}
+/* Добавить в конец файла styles.css */
 
-.project-modal-body {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    padding: 2rem;
-}
-
-.project-image-container {
+.project-content {
     text-align: center;
-    margin-bottom: 1rem;
+    z-index: 2;
+    position: relative;
 }
 
-.project-image {
-    max-width: 100%;
-    max-height: 300px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-.project-info {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.project-info h4 {
-    color: #dc3545;
+.project-content h3 {
     margin-bottom: 0.5rem;
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 0.8rem + 1vw, 1.3rem);
 }
 
-.project-description p {
-    line-height: 1.6;
-    color: #555;
-}
-
-/* Технологии */
-.tech-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-}
-
-.tech-tag {
-    background: linear-gradient(135deg, #dc3545 0%, #ff6b7a 100%);
-    color: white;
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
+.project-content p {
     font-size: 0.9rem;
-    font-weight: 500;
+    opacity: 0.9;
+    font-weight: normal;
+}
+/* === ДОПОЛНИТЕЛЬНЫЕ УЛУЧШЕНИЯ ДЛЯ ВСЕХ СТРАНИЦ === */
+
+/* Улучшенная семантика для проектов на странице проектов */
+.projects-grid-full {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 2rem;
 }
 
-/* Функциональность */
-.project-features ul {
-    list-style-type: none;
-    padding-left: 0;
+.project-card-full {
+    min-width: 0;
+    container-type: inline-size;
 }
 
-.project-features li {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #f0f0f0;
-    position: relative;
-    padding-left: 1.5rem;
+/* Контейнерные запросы для карточек проектов */
+@supports (container-type: inline-size) {
+    @container (min-width: 400px) {
+        .project-card-full {
+            padding: 2.5rem;
+        }
+    }
 }
 
-.project-features li:before {
-    content: "✓";
-    color: #28a745;
-    position: absolute;
-    left: 0;
-    font-weight: bold;
+/* Улучшения для дневника */
+.progress-list {
+    container-type: inline-size;
 }
 
-.project-features li:last-child {
-    border-bottom: none;
+@supports (container-type: inline-size) {
+    @container (min-width: 600px) {
+        .progress-item {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+        }
+    }
 }
 
-/* Ссылки на проекты */
-.project-links {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
+/* Улучшения для формы контактов */
+.contact-form {
+    container-type: inline-size;
 }
 
-.project-link {
-    display: inline-block;
-    padding: 0.8rem 1.5rem;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    text-align: center;
-    flex: 1;
+@supports (container-type: inline-size) {
+    @container (min-width: 500px) {
+        .form-group {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .form-group label {
+            margin-bottom: 0;
+            text-align: right;
+        }
+    }
 }
 
-.github-link {
-    background: #333;
-    color: white;
-    border: 2px solid #333;
+/* Улучшенная типографика с clamp */
+.contact-info h3 {
+    font-size: clamp(1.2rem, 1rem + 1vw, 1.5rem);
 }
 
-.github-link:hover {
-    background: white;
-    color: #333;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+.contact-info p {
+    font-size: clamp(1rem, 0.9rem + 0.5vw, 1.1rem);
 }
 
-.demo-link {
-    background: #dc3545;
-    color: white;
-    border: 2px solid #dc3545;
+/* Анимации с учетом prefers-reduced-motion */
+@media (prefers-reduced-motion: no-preference) {
+    .project-card-full,
+    .progress-item,
+    .contact-info {
+        transition: all 0.3s ease;
+    }
+    
+    .project-card-full:hover {
+        transform: translateY(-5px);
+    }
 }
 
-.demo-link:hover {
-    background: white;
-    color: #dc3545;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.15);
+/* Улучшенные фокус-стили для доступности */
+.filter-btn:focus-visible,
+.add-entry-btn:focus-visible,
+.submit-btn:focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: 2px;
 }
 
-/* Адаптивность для модального окна проектов */
+/* Safe areas для всех страниц */
 @media (max-width: 768px) {
-    .project-modal-container {
-        margin: 1rem;
-        max-width: none;
-    }
-    
-    .project-modal-body {
-        padding: 1.5rem;
-    }
-    
-    .project-links {
-        flex-direction: column;
-    }
-    
-    .tech-tags {
-        justify-content: center;
-    }
-    
-    .project-image {
-        max-height: 200px;
+    body {
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
     }
 }
 
-@media (max-width: 480px) {
-    .project-modal-body {
-        padding: 1rem;
+/* Print styles для доступности */
+@media print {
+    .skip-link,
+    .download-btn,
+    .add-entry-btn,
+    .filter-btn,
+    .contact-form {
+        display: none;
     }
     
-    .project-info h4 {
-        font-size: 1.1rem;
+    .project-card,
+    .project-card-full {
+        break-inside: avoid;
     }
-    
-    .tech-tag {
-        font-size: 0.8rem;
-        padding: 0.2rem 0.6rem;
-    }
-}
-
-/* Улучшаем внешний вид карточек проектов на главной */
-.project-card {
-    background: linear-gradient(135deg, #dc3545 0%, #ff6b7a 100%);
-    color: white;
-    height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 12px;
-    font-size: 1.4rem;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-}
-
-.project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(220, 53, 69, 0.4);
-}
-
-.project-card:after {
-    content: "Нажмите для подробностей";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0,0,0,0.7);
-    color: white;
-    font-size: 0.7rem;
-    padding: 0.3rem;
-    text-align: center;
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
-}
-
-.project-card:hover:after {
-    transform: translateY(0);
 }
