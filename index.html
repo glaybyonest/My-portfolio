@@ -2,17 +2,21 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Портфолио Сецкова Даниила - студента группы ЭФБО-13-24, веб-разработчика">
+    <meta name="keywords" content="веб-разработка, портфолио, студент, JavaScript, HTML, CSS">
     <title>Портфолио - Главная</title>
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Перейти к основному содержимому</a>
+
     <header>
         <div class="header-content">
             <div class="logo">
                 <h1>Сецков Даниил</h1>
             </div>
-            <nav>
+            <nav aria-label="Основная навигация">
                 <ul>
                     <li><a href="index.html" class="active">Главная</a></li>
                     <li><a href="pages/project.html">Проекты</a></li>
@@ -23,7 +27,7 @@
         </div>
     </header>
 
-    <main>
+    <main id="main-content">
         <section class="hero">
             <div class="hero-content">
                 <div class="hero-text">
@@ -31,11 +35,17 @@
                     <p class="group">группы ЭФБО-13-24</p>
                     <p class="interests">Увлекаюсь веб-разработкой</p>
                     <button class="download-btn" data-download-resume>
-                            📄 Скачать резюме
-                        </button>
+                        📄 Скачать резюме
+                    </button>
                 </div>
                 <div class="hero-photo">
-                    <img src="images/qp.jpg" alt="Фото студента" class="student-photo">
+                    <img 
+                        class="student-photo"
+                        src="images/qp.jpg"
+                        alt="Портрет студента Сецкова Даниила"
+                        width="200" 
+                        height="200"
+                        loading="eager">
                 </div>
             </div>
         </section>
@@ -75,9 +85,24 @@
         <section class="projects-preview">
             <h2>Лучшие проекты</h2>
             <div class="projects-grid">
-                <div class="project-card" data-project="1">Личный сайт-портфолио</div>
-                <div class="project-card" data-project="2">Todo-приложение</div>
-                <div class="project-card" data-project="3">Интернет-магазин</div>
+                <div class="project-card" data-project="1">
+                    <div class="project-content">
+                        <h3>Личный сайт-портфолио</h3>
+                        <p>HTML5, CSS3, JavaScript</p>
+                    </div>
+                </div>
+                <div class="project-card" data-project="2">
+                    <div class="project-content">
+                        <h3>Todo-приложение</h3>
+                        <p>JavaScript, Local Storage</p>
+                    </div>
+                </div>
+                <div class="project-card" data-project="3">
+                    <div class="project-content">
+                        <h3>Интернет-магазин</h3>
+                        <p>React, Node.js, Bootstrap</p>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
