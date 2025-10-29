@@ -13,7 +13,7 @@
     <header>
         <div class="header-content">
             <div class="logo">
-                <h1>Сецков Даниил</h1>
+                <h1 class="adaptive-heading">Сецков Даниил</h1>
             </div>
             <nav aria-label="Основная навигация">
                 <ul>
@@ -28,45 +28,159 @@
 
     <main id="main-content">
         <section class="contacts">
-            <h2>Свяжитесь со мной</h2>
+            <h2 class="adaptive-heading">Свяжитесь со мной</h2>
             
-            <form class="contact-form" id="contact-form" aria-labelledby="contact-heading">
-                <div class="form-group">
-                    <label for="name">Имя:</label>
-                    <input type="text" id="name" name="name" required 
-                           placeholder="Введите ваше имя"
-                           aria-required="true">
+            <div class="contact-hero">
+                <div class="contact-intro scalable-element">
+                    <h3>Давайте создадим что-то удивительное вместе!</h3>
+                    <p class="adaptive-text">Я открыт для новых проектов, сотрудничества и интересных предложений. Не стесняйтесь связаться со мной любым удобным способом.</p>
                 </div>
-                
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required 
-                           placeholder="Введите ваш email"
-                           aria-required="true">
+                <div class="contact-illustration">
+                    <picture>
+                        <source srcset="../images/ui/contact-illustration.webp" type="image/webp">
+                        <source srcset="../images/ui/contact-illustration.jpg" type="image/jpeg">
+                        <img 
+                            src="../images/ui/contact-illustration.jpg" 
+                            alt="Контактная иллюстрация - связь и общение"
+                            class="responsive-image"
+                            loading="lazy"
+                            width="400"
+                            height="300">
+                    </picture>
                 </div>
-                
-                <div class="form-group">
-                    <label for="message">Сообщение:</label>
-                    <textarea id="message" name="message" rows="5" required 
-                              placeholder="Введите ваше сообщение (минимум 10 символов)"
-                              aria-required="true"></textarea>
-                </div>
-                
-                <button type="submit" class="submit-btn">Отправить сообщение</button>
+            </div>
+
+            <form class="contact-form" id="contact-form" aria-labelledby="contact-heading" novalidate>
+                <fieldset>
+                    <legend id="contact-heading">Форма обратной связи</legend>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Имя *</label>
+                            <input type="text" id="name" name="name" required 
+                                   placeholder="Введите ваше имя"
+                                   aria-required="true"
+                                   class="scalable-element"
+                                   minlength="2"
+                                   maxlength="50">
+                            <span class="error-message" id="name-error" aria-live="polite"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required 
+                                   placeholder="Введите ваш email"
+                                   aria-required="true"
+                                   class="scalable-element"
+                                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                            <span class="error-message" id="email-error" aria-live="polite"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Тема сообщения *</label>
+                        <select id="subject" name="subject" required class="scalable-element" aria-required="true">
+                            <option value="">Выберите тему сообщения</option>
+                            <option value="work">Сотрудничество</option>
+                            <option value="project">Обсуждение проекта</option>
+                            <option value="internship">Стажировка</option>
+                            <option value="question">Технический вопрос</option>
+                            <option value="other">Другое</option>
+                        </select>
+                        <span class="error-message" id="subject-error" aria-live="polite"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="budget">Бюджет проекта (опционально)</label>
+                        <select id="budget" name="budget" class="scalable-element">
+                            <option value="">Не указано</option>
+                            <option value="small">До 10,000 ₽</option>
+                            <option value="medium">10,000 - 50,000 ₽</option>
+                            <option value="large">50,000 - 100,000 ₽</option>
+                            <option value="enterprise">Свыше 100,000 ₽</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Сообщение *</label>
+                        <textarea id="message" name="message" rows="6" required 
+                                  placeholder="Опишите ваш проект или вопрос подробно (минимум 10 символов)"
+                                  aria-required="true"
+                                  class="scalable-element"
+                                  minlength="10"
+                                  maxlength="1000"></textarea>
+                        <div class="char-counter">
+                            <span id="char-count">0</span>/1000 символов
+                        </div>
+                        <span class="error-message" id="message-error" aria-live="polite"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label scalable-element">
+                            <input type="checkbox" id="newsletter" name="newsletter">
+                            <span class="checkmark"></span>
+                            Подписаться на новости о новых проектах
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn scalable-element" id="submit-btn">
+                        <span class="btn-text">Отправить сообщение</span>
+                        <span class="btn-loading" style="display: none;">Отправка...</span>
+                    </button>
+                </fieldset>
             </form>
 
             <div class="contact-info">
-                <h3>Контакты:</h3>
-                <p>📧 setskov.d.a@edu.ru</p>
-                <p>📱 GitHub: <a href="https://github.com/glaybyonest" target="_blank" class="footer-github-link">Glaybyonest</a></p>
-                <p>📍 Москва, Россия</p>
-                <p>🕒 Время для связи: Пн-Пт 10:00-18:00</p>
+                <h3 class="adaptive-heading">Мои контакты</h3>
+                <div class="contact-methods">
+                    <div class="contact-method scalable-element">
+                        <span class="contact-icon">📧</span>
+                        <div>
+                            <strong>Email</strong>
+                            <p>setskov.d.a@edu.ru</p>
+                            <small>Отвечаю в течение 24 часов</small>
+                        </div>
+                    </div>
+                    <div class="contact-method scalable-element">
+                        <span class="contact-icon">🐙</span>
+                        <div>
+                            <strong>GitHub</strong>
+                            <p><a href="https://github.com/glaybyonest" target="_blank" rel="noopener">Glaybyonest</a></p>
+                            <small>Мои проекты и код</small>
+                        </div>
+                    </div>
+                    <div class="contact-method scalable-element">
+                        <span class="contact-icon">💼</span>
+                        <div>
+                            <strong>LinkedIn</strong>
+                            <p><a href="https://linkedin.com/in/daniil-setskov" target="_blank" rel="noopener">Daniil Setskov</a></p>
+                            <small>Профессиональный профиль</small>
+                        </div>
+                    </div>
+                    <div class="contact-method scalable-element">
+                        <span class="contact-icon">📍</span>
+                        <div>
+                            <strong>Местоположение</strong>
+                            <p>Москва, Россия</p>
+                            <small>Доступен для удаленной работы</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="availability scalable-element">
+                <h4>Доступность для проектов</h4>
+                <div class="availability-status">
+                    <span class="status-dot available"></span>
+                    <span>Свободен для новых проектов</span>
+                </div>
+                <p class="availability-note">Готов рассмотреть предложения о сотрудничестве, стажировках и интересных проектах.</p>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 Glaybyonest</p>
+        <p>&copy; 2025 Сецков Даниил. Все права защищены.</p>
     </footer>
 
     <script src="../scripts/modal.js"></script>

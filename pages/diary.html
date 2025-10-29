@@ -13,7 +13,7 @@
     <header>
         <div class="header-content">
             <div class="logo">
-                <h1>Сецков Даниил</h1>
+                <h1 class="adaptive-heading">Сецков Даниил</h1>
             </div>
             <nav aria-label="Основная навигация">
                 <ul>
@@ -28,73 +28,190 @@
 
     <main id="main-content">
         <section class="diary">
-            <h2>Мой учебный прогресс</h2>
+            <h2 class="adaptive-heading">Мой учебный прогресс</h2>
             
-            <div class="progress-list">
-                <div class="progress-item completed">
-                    <span>15 окт - Верстка макета сайта</span>
-                    <span class="status">✓</span>
+            <div class="progress-overview">
+                <div class="progress-chart scalable-element">
+                    <h3>Общий прогресс обучения</h3>
+                    <div class="chart-container">
+                        <div class="chart-bar">
+                            <div class="chart-fill" style="width: 75%"></div>
+                            <span class="chart-label">75% завершено</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="progress-item in-progress">
-                    <span>16 окт - JavaScript основы</span>
-                    <span class="status">in progress</span>
-                </div>
-                <div class="progress-item in-progress">
-                    <span>17 окт - Работа с формами</span>
-                    <span class="status">in progress</span>
-                </div>
-                <div class="progress-item in-progress">
-                    <span>18 окт - Адаптивный дизайн</span>
-                    <span class="status">in progress</span>
-                </div>
-                <div class="progress-item">
-                    <span>19 окт - React компоненты</span>
-                    <span class="status">○</span>
-                </div>
-                <div class="progress-item">
-                    <span>20 окт - Node.js сервер</span>
-                    <span class="status">○</span>
+                
+                <div class="current-focus scalable-element">
+                    <h3>Текущий фокус</h3>
+                    <div class="focus-item">
+                        <img src="../images/skills/react-icon.svg" alt="React" class="focus-icon" width="32" height="32">
+                        <div class="focus-content">
+                            <strong>React.js</strong>
+                            <p>Изучение компонентов и хуков</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <h2>Текущие курсы</h2>
-            <div class="courses">
-                <div class="course-item">
-                    <span>Веб-разработка</span>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 90%"></div>
+            <table class="progress-table" aria-label="Таблица учебного прогресса">
+                <thead>
+                    <tr>
+                        <th class="date-column">Дата</th>
+                        <th>Тема / Проект</th>
+                        <th>Статус</th>
+                        <th>Прогресс</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="scalable-element">
+                        <td class="date-column">15 окт 2024</td>
+                        <td>Верстка адаптивного макета сайта</td>
+                        <td><span class="status completed">✓ Завершено</span></td>
+                        <td>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 100%"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="action-btn view-btn">Просмотр</button>
+                        </td>
+                    </tr>
+                    <tr class="scalable-element">
+                        <td class="date-column">16 окт 2024</td>
+                        <td>JavaScript основы (ES6+)</td>
+                        <td><span class="status completed">✓ Завершено</span></td>
+                        <td>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 100%"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="action-btn view-btn">Просмотр</button>
+                        </td>
+                    </tr>
+                    <tr class="scalable-element">
+                        <td class="date-column">17 окт 2024</td>
+                        <td>Работа с формами и валидация</td>
+                        <td><span class="status in-progress">В процессе</span></td>
+                        <td>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="action-btn continue-btn">Продолжить</button>
+                        </td>
+                    </tr>
+                    <tr class="scalable-element">
+                        <td class="date-column">18 окт 2024</td>
+                        <td>Адаптивный дизайн и медиазапросы</td>
+                        <td><span class="status in-progress">В процессе</span></td>
+                        <td>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 70%"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="action-btn continue-btn">Продолжить</button>
+                        </td>
+                    </tr>
+                    <tr class="scalable-element">
+                        <td class="date-column">19 окт 2024</td>
+                        <td>React компоненты и состояние</td>
+                        <td><span class="status planned">Запланировано</span></td>
+                        <td>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 10%"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="action-btn start-btn">Начать</button>
+                        </td>
+                    </tr>
+                    <tr class="scalable-element">
+                        <td class="date-column">20 окт 2024</td>
+                        <td>Node.js и основы серверной разработки</td>
+                        <td><span class="status planned">Запланировано</span></td>
+                        <td>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 0%"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="action-btn start-btn">Начать</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 class="adaptive-heading">Текущие курсы</h2>
+            <div class="courses-grid">
+                <div class="course-card scalable-element">
+                    <div class="course-header">
+                        <img src="../images/skills/html-css-icon.svg" alt="HTML/CSS" class="course-icon" width="40" height="40">
+                        <h3>Веб-разработка</h3>
                     </div>
-                    <span>90%</span>
+                    <div class="course-progress">
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                        <span>90%</span>
+                    </div>
+                    <p class="course-description">Основы HTML, CSS, JavaScript и адаптивного дизайна</p>
                 </div>
-                <div class="course-item">
-                    <span>JavaScript</span>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 70%"></div>
+                
+                <div class="course-card scalable-element">
+                    <div class="course-header">
+                        <img src="../images/skills/javascript-icon.svg" alt="JavaScript" class="course-icon" width="40" height="40">
+                        <h3>JavaScript</h3>
                     </div>
-                    <span>70%</span>
+                    <div class="course-progress">
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 70%"></div>
+                        </div>
+                        <span>70%</span>
+                    </div>
+                    <p class="course-description">Современный JavaScript ES6+, асинхронное программирование</p>
                 </div>
-                <div class="course-item">
-                    <span>React</span>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 50%"></div>
+                
+                <div class="course-card scalable-element">
+                    <div class="course-header">
+                        <img src="../images/skills/react-icon.svg" alt="React" class="course-icon" width="40" height="40">
+                        <h3>React</h3>
                     </div>
-                    <span>50%</span>
+                    <div class="course-progress">
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 50%"></div>
+                        </div>
+                        <span>50%</span>
+                    </div>
+                    <p class="course-description">Библиотека React, хуки, управление состоянием</p>
                 </div>
-                <div class="course-item">
-                    <span>Базы данных</span>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 40%"></div>
+                
+                <div class="course-card scalable-element">
+                    <div class="course-header">
+                        <img src="../images/skills/nodejs-icon.svg" alt="Node.js" class="course-icon" width="40" height="40">
+                        <h3>Node.js</h3>
                     </div>
-                    <span>40%</span>
+                    <div class="course-progress">
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 40%"></div>
+                        </div>
+                        <span>40%</span>
+                    </div>
+                    <p class="course-description">Серверная разработка на Node.js и Express</p>
                 </div>
             </div>
 
-            <button class="add-entry-btn" type="button">Добавить запись</button>
+            <div class="diary-actions">
+                <button class="add-entry-btn scalable-element" type="button">+ Добавить запись</button>
+            </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 Glaybyonest</p>
+        <p>&copy; 2025 Сецков Даниил. Все права защищены.</p>
     </footer>
 
     <script src="../scripts/diary.js"></script>

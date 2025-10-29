@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="description" content="Проекты Сецкова Даниила - веб-разработчика">
+    <meta name="keywords" content="веб-разработка, проекты, JavaScript, React, Node.js, портфолио">
     <title>Портфолио - Проекты</title>
     <link rel="stylesheet" href="../styles/styles.css">
 </head>
@@ -13,7 +14,7 @@
     <header>
         <div class="header-content">
             <div class="logo">
-                <h1>Сецков Даниил</h1>
+                <h1 class="adaptive-heading">Сецков Даниил</h1>
             </div>
             <nav aria-label="Основная навигация">
                 <ul>
@@ -27,48 +28,320 @@
     </header>
 
     <main id="main-content">
-        <section class="projects-header">
-            <h2>Мои проекты</h2>
-            <div class="project-filters" role="group" aria-label="Фильтры проектов">
-                <button class="filter-btn active" type="button">Все</button>
-                <button class="filter-btn" type="button">HTML</button>
-                <button class="filter-btn" type="button">JS</button>
-                <button class="filter-btn" type="button">React</button>
+        <section class="projects-hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="adaptive-heading">Мои проекты</h1>
+                    <p class="adaptive-text">Здесь собраны мои лучшие работы в веб-разработке. Каждый проект - это уникальный опыт и новые вызовы.</p>
+                    <div class="project-stats">
+                        <div class="stat">
+                            <span class="stat-number">12+</span>
+                            <span class="stat-label">Проектов</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">6</span>
+                            <span class="stat-label">Технологий</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">2</span>
+                            <span class="stat-label">Года</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <img src="../images/ui/projects-hero.svg" alt="Визуализация проектов" class="responsive-image" loading="eager" width="400" height="300">
+                </div>
             </div>
         </section>
 
-        <section class="projects-grid-full">
-            <article class="project-card-full">
-                <h3>Личный сайт</h3>
-                <p>HTML, CSS, JavaScript</p>
+        <section class="projects-header">
+            <div class="filter-section">
+                <h2 class="adaptive-heading">Портфолио проектов</h2>
+                <div class="project-filters" role="group" aria-label="Фильтры проектов">
+                    <button class="filter-btn active" type="button" data-filter="all">Все проекты</button>
+                    <button class="filter-btn" type="button" data-filter="frontend">Frontend</button>
+                    <button class="filter-btn" type="button" data-filter="backend">Backend</button>
+                    <button class="filter-btn" type="button" data-filter="fullstack">Fullstack</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="projects-gallery">
+            <!-- Проект 1: Портфолио сайт -->
+            <article class="gallery-item scalable-element" data-category="frontend" data-project="portfolio">
+                <div class="project-image-container">
+                    <picture>
+                        <source srcset="../images/projects/portfolio-screenshot.webp" type="image/webp">
+                        <img 
+                            src="../images/projects/portfolio-screenshot.jpg" 
+                            alt="Скриншот личного сайта-портфолио с современным дизайном"
+                            class="gallery-image"
+                            loading="lazy"
+                            width="600"
+                            height="400">
+                    </picture>
+                    <div class="project-overlay">
+                        <button class="view-project-btn" data-project="portfolio">Смотреть проект</button>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h3>Личный сайт-портфолио</h3>
+                    <p class="project-description">Современный адаптивный веб-сайт с информацией о навыках, проектах и контактами. Реализована сложная анимация и полная доступность.</p>
+                    <div class="project-meta">
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML5</span>
+                            <span class="tech-tag">CSS3</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Адаптивный дизайн</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/glaybyonest/portfolio" class="project-link" target="_blank" rel="noopener">
+                                <img src="../images/skills/github-icon.svg" alt="GitHub" width="16" height="16">
+                                Код
+                            </a>
+                            <a href="#" class="project-link" target="_blank" rel="noopener">
+                                <img src="../images/skills/external-icon.svg" alt="Демо" width="16" height="16">
+                                Демо
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </article>
-            <article class="project-card-full">
-                <h3>Todo-приложение</h3>
-                <p>JavaScript, Local Storage</p>
+            
+            <!-- Проект 2: Todo приложение -->
+            <article class="gallery-item scalable-element" data-category="frontend" data-project="todo">
+                <div class="project-image-container">
+                    <picture>
+                        <source srcset="../images/projects/todo-app-screenshot.webp" type="image/webp">
+                        <img 
+                            src="../images/projects/todo-app-screenshot.jpg" 
+                            alt="Интерфейс Todo приложения со списком задач"
+                            class="gallery-image"
+                            loading="lazy"
+                            width="600"
+                            height="400">
+                    </picture>
+                    <div class="project-overlay">
+                        <button class="view-project-btn" data-project="todo">Смотреть проект</button>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h3>Todo-приложение</h3>
+                    <p class="project-description">Продуктивное приложение для управления задачами с возможностью создания, редактирования, удаления и фильтрации задач. Данные сохраняются в Local Storage.</p>
+                    <div class="project-meta">
+                        <div class="project-tech">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Local Storage</span>
+                            <span class="tech-tag">DOM API</span>
+                            <span class="tech-tag">CSS Grid</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/glaybyonest/todo-app" class="project-link" target="_blank" rel="noopener">
+                                <img src="../images/skills/github-icon.svg" alt="GitHub" width="16" height="16">
+                                Код
+                            </a>
+                            <a href="#" class="project-link" target="_blank" rel="noopener">
+                                <img src="../images/skills/external-icon.svg" alt="Демо" width="16" height="16">
+                                Демо
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </article>
-            <article class="project-card-full">
-                <h3>Интернет-магазин</h3>
-                <p>React, Node.js</p>
+            
+            <!-- Проект 3: Интернет-магазин -->
+            <article class="gallery-item scalable-element" data-category="fullstack" data-project="ecommerce">
+                <div class="project-image-container">
+                    <picture>
+                        <source srcset="../images/projects/ecommerce-screenshot.webp" type="image/webp">
+                        <img 
+                            src="../images/projects/ecommerce-screenshot.jpg" 
+                            alt="Главная страница интернет-магазина с каталогом товаров"
+                            class="gallery-image"
+                            loading="lazy"
+                            width="600"
+                            height="400">
+                    </picture>
+                    <div class="project-overlay">
+                        <button class="view-project-btn" data-project="ecommerce">Смотреть проект</button>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h3>Интернет-магазин</h3>
+                    <p class="project-description">Полнофункциональный интернет-магазин с системой управления товарами, корзиной покупок, пользовательскими отзывами и системой фильтрации.</p>
+                    <div class="project-meta">
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">REST API</span>
+                            <span class="tech-tag">JWT</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/glaybyonest/ecommerce" class="project-link" target="_blank" rel="noopener">
+                                <img src="../images/skills/github-icon.svg" alt="GitHub" width="16" height="16">
+                                Код
+                            </a>
+                            <a href="#" class="project-link" target="_blank" rel="noopener">
+                                <img src="../images/skills/external-icon.svg" alt="Демо" width="16" height="16">
+                                Демо
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </article>
-            <article class="project-card-full">
-                <h3>Портфолио</h3>
-                <p>Bootstrap, Responsive Design</p>
+
+            <!-- Проект 4: REST API Сервис -->
+            <article class="gallery-item scalable-element" data-category="backend" data-project="api">
+                <div class="project-image-container">
+                    <picture>
+                        <source srcset="../images/projects/api-service.webp" type="image/webp">
+                        <img 
+                            src="../images/projects/api-service.jpg" 
+                            alt="Документация REST API сервиса с endpoints"
+                            class="gallery-image"
+                            loading="lazy"
+                            width="600"
+                            height="400">
+                    </picture>
+                    <div class="project-overlay">
+                        <button class="view-project-btn" data-project="api">Смотреть проект</button>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h3>REST API Сервис</h3>
+                    <p class="project-description">Масштабируемый REST API для управления пользователями и контентом. Реализована аутентификация, авторизация, валидация данных и документация Swagger.</p>
+                    <div class="project-meta">
+                        <div class="project-tech">
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">Express</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">JWT</span>
+                            <span class="tech-tag">Swagger</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/glaybyonest/rest-api" class="project-link" target="_blank" rel="noopener">
+                                <img src="../images/skills/github-icon.svg" alt="GitHub" width="16" height="16">
+                                Код
+                            </a>
+                            <a href="#" class="project-link" target="_blank" rel="noopener">
+                                <img src="../images/skills/external-icon.svg" alt="Документация" width="16" height="16">
+                                Документация
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </article>
-            <article class="project-card-full">
-                <h3>Игра-пазл</h3>
-                <p>JavaScript, Canvas API</p>
+
+            <!-- Проект 5: Погодное приложение -->
+            <article class="gallery-item scalable-element" data-category="frontend" data-project="weather">
+                <div class="project-image-container">
+                    <picture>
+                        <source srcset="../images/projects/weather-app.webp" type="image/webp">
+                        <img 
+                            src="../images/projects/weather-app.jpg" 
+                            alt="Интерфейс погодного приложения с прогнозом на 5 дней"
+                            class="gallery-image"
+                            loading="lazy"
+                            width="600"
+                            height="400">
+                    </picture>
+                    <div class="project-overlay">
+                        <button class="view-project-btn" data-project="weather">Смотреть проект</button>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h3>Погодное приложение</h3>
+                    <p class="project-description">Интерактивное приложение для просмотра текущей погоды и прогноза на 5 дней. Интеграция с OpenWeather API, геолокация и адаптивный дизайн.</p>
+                    <div class="project-meta">
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">API Integration</span>
+                            <span class="tech-tag">Geolocation API</span>
+                            <span class="tech-tag">Responsive Design</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/glaybyonest/weather-app" class="project-link" target="_blank" rel="noopener">
+                                <img src="../images/skills/github-icon.svg" alt="GitHub" width="16" height="16">
+                                Код
+                            </a>
+                            <a href="#" class="project-link" target="_blank" rel="noopener">
+                                <img src="../images/skills/external-icon.svg" alt="Демо" width="16" height="16">
+                                Демо
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </article>
-            <article class="project-card-full">
-                <h3>Погодное приложение</h3>
-                <p>React, API Integration</p>
+
+            <!-- Проект 6: Чат приложение -->
+            <article class="gallery-item scalable-element" data-category="fullstack" data-project="chat">
+                <div class="project-image-container">
+                    <picture>
+                        <source srcset="../images/projects/chat-app.webp" type="image/webp">
+                        <img 
+                            src="../images/projects/chat-app.jpg" 
+                            alt="Интерфейс чат приложения с онлайн пользователями"
+                            class="gallery-image"
+                            loading="lazy"
+                            width="600"
+                            height="400">
+                    </picture>
+                    <div class="project-overlay">
+                        <button class="view-project-btn" data-project="chat">Смотреть проект</button>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h3>Чат приложение</h3>
+                    <p class="project-description">Real-time чат приложение с комнатами, приватными сообщениями и уведомлениями. WebSocket соединение для мгновенной доставки сообщений.</p>
+                    <div class="project-meta">
+                        <div class="project-tech">
+                            <span class="tech-tag">Vue.js</span>
+                            <span class="tech-tag">Socket.io</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">WebSockets</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/glaybyonest/chat-app" class="project-link" target="_blank" rel="noopener">
+                                <img src="../images/skills/github-icon.svg" alt="GitHub" width="16" height="16">
+                                Код
+                            </a>
+                            <a href="#" class="project-link" target="_blank" rel="noopener">
+                                <img src="../images/skills/external-icon.svg" alt="Демо" width="16" height="16">
+                                Демо
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </article>
+        </section>
+
+        <section class="projects-cta">
+            <div class="cta-content">
+                <h2 class="adaptive-heading">Заинтересованы в сотрудничестве?</h2>
+                <p class="adaptive-text">У вас есть интересный проект или идея? Давайте обсудим, как мы можем работать вместе!</p>
+                <div class="cta-actions">
+                    <a href="contacts.html" class="cta-btn primary">Связаться со мной</a>
+                    <a href="../index.html" class="cta-btn secondary">Вернуться на главную</a>
+                </div>
+            </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 Glaybyonest</p>
+        <div class="footer-content">
+            <p>&copy; 2025 Сецков Даниил. Все права защищены.</p>
+            <div class="footer-links">
+                <a href="../index.html">Главная</a>
+                <a href="project.html">Проекты</a>
+                <a href="diary.html">Дневник</a>
+                <a href="contacts.html">Контакты</a>
+            </div>
+        </div>
     </footer>
 
     <script src="../scripts/projects-modal.js"></script>
+    <script src="../scripts/projects-filter.js"></script>
 </body>
 </html>
