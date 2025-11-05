@@ -29,11 +29,11 @@
     <main id="main-content" role="main">
         <h1 class="sr-only">Контакты Сецкова Даниила</h1>
         
-        <section class="contacts" aria-labelledby="contacts-heading">
+        <section class="contacts" aria-labelledby="contacts-heading" role="region">
             <h2 id="contacts-heading" class="adaptive-heading">Свяжитесь со мной</h2>
             
-            <div class="contact-hero">
-                <div class="contact-intro scalable-element">
+            <div class="contact-hero" role="banner">
+                <div class="contact-intro scalable-element" role="contentinfo">
                     <h3>Давайте создадим что-то удивительное вместе!</h3>
                     <p class="adaptive-text">Я открыт для новых проектов, сотрудничества и интересных предложений. Не стесняйтесь связаться со мной любым удобным способом.</p>
                 </div>
@@ -56,10 +56,11 @@
                 <form class="contact-form" id="contact-form" 
                       aria-labelledby="contact-heading" 
                       novalidate
-                      autocomplete="on">
+                      autocomplete="on"
+                      role="form">
                     
-                    <fieldset class="form-fieldset">
-                        <legend id="contact-heading" class="form-legend">
+                    <fieldset class="form-fieldset" role="group">
+                        <legend id="contact-heading" class="form-legend" role="heading" aria-level="2">
                             Форма обратной связи
                             <span class="sr-only"> - все поля, отмеченные звёздочкой, обязательны для заполнения</span>
                         </legend>
@@ -73,11 +74,15 @@
                                 <input type="text" id="name" name="name" required 
                                        placeholder="Введите ваше имя"
                                        aria-required="true"
+                                       aria-describedby="name-help name-error"
                                        class="form-input scalable-element"
                                        minlength="2"
                                        maxlength="50"
                                        autocomplete="name">
-                                <span class="error-message" id="name-error" aria-live="polite"></span>
+                                <div id="name-help" class="help-text" aria-live="polite">
+                                    Введите ваше полное имя
+                                </div>
+                                <span class="error-message" id="name-error" aria-live="assertive"></span>
                             </div>
                             
                             <div class="form-group">
@@ -88,10 +93,14 @@
                                 <input type="email" id="email" name="email" required 
                                        placeholder="Введите ваш email"
                                        aria-required="true"
+                                       aria-describedby="email-help email-error"
                                        class="form-input scalable-element"
                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                                        autocomplete="email">
-                                <span class="error-message" id="email-error" aria-live="polite"></span>
+                                <div id="email-help" class="help-text" aria-live="polite">
+                                    Мы отправим ответ на этот адрес
+                                </div>
+                                <span class="error-message" id="email-error" aria-live="assertive"></span>
                             </div>
                         </div>
                         
@@ -103,7 +112,8 @@
                                 </label>
                                 <select id="subject" name="subject" required 
                                         class="form-select scalable-element" 
-                                        aria-required="true">
+                                        aria-required="true"
+                                        aria-describedby="subject-help subject-error">
                                     <option value="">Выберите тему сообщения</option>
                                     <option value="work">Сотрудничество</option>
                                     <option value="project">Обсуждение проекта</option>
@@ -111,18 +121,29 @@
                                     <option value="question">Технический вопрос</option>
                                     <option value="other">Другое</option>
                                 </select>
-                                <span class="error-message" id="subject-error" aria-live="polite"></span>
+                                <div id="subject-help" class="help-text" aria-live="polite">
+                                    Выберите наиболее подходящую тему
+                                </div>
+                                <span class="error-message" id="subject-error" aria-live="assertive"></span>
                             </div>
                             
                             <div class="form-group">
-                                <label for="budget" class="form-label">Бюджет проекта (опционально)</label>
-                                <select id="budget" name="budget" class="form-select scalable-element">
+                                <label for="budget" class="form-label">
+                                    Бюджет проекта
+                                    <span class="sr-only">(опционально)</span>
+                                </label>
+                                <select id="budget" name="budget" 
+                                        class="form-select scalable-element"
+                                        aria-describedby="budget-help">
                                     <option value="">Не указано</option>
                                     <option value="small">До 10,000 ₽</option>
                                     <option value="medium">10,000 - 50,000 ₽</option>
                                     <option value="large">50,000 - 100,000 ₽</option>
                                     <option value="enterprise">Свыше 100,000 ₽</option>
                                 </select>
+                                <div id="budget-help" class="help-text" aria-live="polite">
+                                    Укажите бюджет для оценки проекта
+                                </div>
                             </div>
                         </div>
                         
@@ -134,21 +155,26 @@
                             <textarea id="message" name="message" rows="6" required 
                                       placeholder="Опишите ваш проект или вопрос подробно (минимум 10 символов)"
                                       aria-required="true"
+                                      aria-describedby="message-help message-error char-count-info"
                                       class="form-textarea scalable-element"
                                       minlength="10"
                                       maxlength="1000"></textarea>
                             <div class="form-meta">
-                                <span class="char-counter" aria-live="polite">
+                                <span id="char-count-info" class="char-counter" role="status" aria-live="polite">
                                     <span id="char-count">0</span>/1000 символов
                                 </span>
                             </div>
-                            <span class="error-message" id="message-error" aria-live="polite"></span>
+                            <div id="message-help" class="help-text" aria-live="polite">
+                                Опишите вашу проблему или вопрос подробно
+                            </div>
+                            <span class="error-message" id="message-error" aria-live="assertive"></span>
                         </div>
 
                         <div class="form-actions">
-                            <button type="submit" class="submit-btn scalable-element" id="submit-btn">
+                            <button type="submit" class="submit-btn scalable-element" id="submit-btn"
+                                    aria-label="Отправить форму обратной связи">
                                 <span class="btn-text">Отправить сообщение</span>
-                                <span class="btn-loading" style="display: none;">
+                                <span class="btn-loading" style="display: none;" aria-hidden="true">
                                     <span class="loading-spinner" aria-hidden="true"></span>
                                     Отправка...
                                 </span>
@@ -158,7 +184,7 @@
                 </form>
             </div>
 
-            <section class="contact-info" aria-labelledby="contact-info-heading">
+            <section class="contact-info" aria-labelledby="contact-info-heading" role="region">
                 <h3 id="contact-info-heading" class="adaptive-heading">Мои контакты</h3>
                 <div class="contact-methods" role="list">
                     <div class="contact-method scalable-element" role="listitem">
@@ -173,7 +199,7 @@
                         <span class="contact-icon" aria-hidden="true">🐙</span>
                         <div class="contact-details">
                             <strong>GitHub</strong>
-                            <p><a href="https://github.com/glaybyonest" target="_blank" rel="noopener">Glaybyonest</a></p>
+                            <p><a href="https://github.com/glaybyonest" target="_blank" rel="noopener" aria-label="Мой профиль на GitHub (откроется в новой вкладке)">Glaybyonest</a></p>
                             <small>Мои проекты и код</small>
                         </div>
                     </div>
@@ -188,7 +214,7 @@
                 </div>
             </section>
 
-            <div class="availability scalable-element" aria-labelledby="availability-heading">
+            <div class="availability scalable-element" aria-labelledby="availability-heading" role="status">
                 <h4 id="availability-heading">Доступность для проектов</h4>
                 <div class="availability-status">
                     <span class="status-dot available" aria-hidden="true"></span>
@@ -203,7 +229,7 @@
         <p>&copy; 2025 Сецков Даниил. Все права защищены.</p>
     </footer>
 
-    <script src="../scripts/modal.js"></script>
-    <script src="../scripts/contact-form.js"></script>
+    <script src="../scripts/modal-enhanced.js"></script>
+    <script src="../scripts/contact-form-enhanced.js"></script>
 </body>
 </html>
