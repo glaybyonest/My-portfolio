@@ -28,17 +28,23 @@
     </header>
 
     <main id="main-content" role="main">
-        <section class="hero" aria-labelledby="hero-heading">
+        <section class="hero" aria-labelledby="hero-heading" role="region">
             <div class="hero-content">
                 <div class="hero-text">
                     <h2 id="hero-heading" class="adaptive-heading">Привет! Я студент</h2>
                     <p class="group adaptive-text">группы ЭФБО-13-24</p>
                     <p class="interests adaptive-text">Увлекаюсь веб-разработкой, создаю современные и адаптивные веб-приложения</p>
-                    <button class="download-btn scalable-element" data-download-resume aria-describedby="download-description">
+                    <button class="download-btn scalable-element" 
+                            data-download-resume 
+                            aria-describedby="download-description"
+                            aria-label="Скачать резюме в формате HTML">
                         📄 Скачать резюме
                     </button>
+                    <div id="download-description" class="sr-only">
+                        Скачает HTML версию этой страницы как ваше резюме
+                    </div>
                 </div>
-                <div class="hero-photo">
+                <div class="hero-photo" role="img" aria-label="Портрет студента Сецкова Даниила в профессиональной обстановке">
                     <picture>
                         <!-- WebP с фолбэком -->
                         <source srcset="images/student/student-photo.webp" type="image/webp">
@@ -52,7 +58,7 @@
                             src="images/student/qp.jpg"
                             srcset="images/student/qp.jpg 300w, images/student/student-medium.jpg 600w, images/student/student-large.jpg 900w"
                             sizes="(max-width: 768px) 300px, (max-width: 1200px) 600px, 900px"
-                            alt="Портрет студента Сецкова Даниила в профессиональной обстановке"
+                            alt=""
                             width="300"
                             height="300"
                             loading="eager"
@@ -62,7 +68,7 @@
             </div>
         </section>
 
-        <section class="skills" aria-labelledby="skills-heading">
+        <section class="skills" aria-labelledby="skills-heading" role="region">
             <h2 id="skills-heading" class="adaptive-heading">Мои навыки</h2>
             <div class="skills-grid" role="list">
                 <div class="skill-category scalable-element" role="listitem">
@@ -137,10 +143,10 @@
             </div>
         </section>
 
-        <section class="projects-preview" aria-labelledby="projects-heading">
+        <section class="projects-preview" aria-labelledby="projects-heading" role="region">
             <h2 id="projects-heading" class="adaptive-heading">Лучшие проекты</h2>
-            <div class="projects-gallery" role="list">
-                <article class="gallery-item scalable-element" data-project="1" role="listitem">
+            <div class="projects-gallery" role="list" aria-label="Галерея лучших проектов">
+                <article class="gallery-item scalable-element" data-project="portfolio" role="listitem">
                     <img 
                         src="images/projects/portfolio-screenshot.jpg" 
                         alt="Личный сайт-портфолио - современный адаптивный дизайн с тёмной и светлой темами"
@@ -154,7 +160,7 @@
                     </div>
                 </article>
                 
-                <article class="gallery-item scalable-element" data-project="2" role="listitem">
+                <article class="gallery-item scalable-element" data-project="todo" role="listitem">
                     <img 
                         src="images/projects/todo-app-screenshot.jpg" 
                         alt="Todo-приложение - интерфейс управления задачами с возможностью добавления, отметки выполнения и удаления"
@@ -168,7 +174,7 @@
                     </div>
                 </article>
                 
-                <article class="gallery-item scalable-element" data-project="3" role="listitem">
+                <article class="gallery-item scalable-element" data-project="ecommerce" role="listitem">
                     <img 
                         src="images/projects/ecommerce-screenshot.jpg" 
                         alt="Интернет-магазин - главная страница с каталогом товаров, фильтрами и корзиной покупок"
@@ -189,7 +195,7 @@
         <p>&copy; 2025 Сецков Даниил. Все права защищены.</p>
     </footer>
 
-    <script src="scripts/download.js"></script>
-    <script src="scripts/projects-modal.js"></script>
+    <script src="scripts/download-enhanced.js"></script>
+    <script src="scripts/projects-modal-enhanced.js"></script>
 </body>
 </html>
