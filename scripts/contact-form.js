@@ -1,4 +1,4 @@
-// scripts/contact-form.js - улучшенная обработка формы
+// scripts/contact-form.js - улучшенная обработка формы с доступностью
 
 console.log('contact-form.js загружен');
 
@@ -6,12 +6,13 @@ class ContactForm {
     constructor() {
         this.form = null;
         this.fields = {};
+        this.liveRegion = null;
         this.init();
     }
     
     init() {
         document.addEventListener('DOMContentLoaded', () => {
-            console.log('Инициализируем улучшенную форму...');
+            console.log('Инициализируем улучшенную форму с доступностью...');
             
             this.form = document.getElementById('contact-form');
             if (!this.form) {
@@ -19,27 +20,47 @@ class ContactForm {
                 return;
             }
             
+            this.createLiveRegion();
             this.initializeFields();
             this.setupEventListeners();
             this.setupCharacterCounter();
             
-            console.log('Улучшенная форма инициализирована');
+            console.log('Улучшенная форма с доступностью инициализирована');
         });
     }
     
-    initializeFields() {
-    this.fields = {
-        name: document.getElementById('name'),
-        email: document.getElementById('email'),
-        subject: document.getElementById('subject'),
-        message: document.getElementById('message'),
-        budget: document.getElementById('budget'),
-        newsletter: document.getElementById('newsletter')
-    };
+    createLiveRegion() {
+        // Создаем живую область для объявлений скринридера
+        this.liveRegion = document.createElement('div');
+        this.liveRegion.setAttribute('aria-live', 'polite');
+        this.liveRegion.setAttribute('aria-atomic', 'true');
+        this.liveRegion.className = 'sr-only';
+        this.liveRegion.id = 'form-live-region';
+        document.body.appendChild(this.liveRegion);
+    }
     
-    // Инициализируем счетчик символов
-    this.charCount = document.getElementById('char-count');
-}
+    announceToScreenReader(message) {
+        if (this.liveRegion) {
+            this.liveRegion.textContent = message;
+            // Очищаем сообщение через короткое время
+            setTimeout(() => {
+                this.liveRegion.textContent = '';
+            }, 3000);
+        }
+    }
+    
+    initializeFields() {
+        this.fields = {
+            name: document.getElementById('name'),
+            email: document.getElementById('email'),
+            subject: document.getElementById('subject'),
+            message: document.getElementById('message'),
+            budget: document.getElementById('budget')
+        };
+        
+        // Инициализируем счетчик символов
+        this.charCount = document.getElementById('char-count');
+    }
     
     setupEventListeners() {
         this.form.addEventListener('submit', (e) => this.handleSubmit(e));
@@ -56,6 +77,14 @@ class ContactForm {
         if (this.fields.message) {
             this.fields.message.addEventListener('input', () => this.updateCharCount());
         }
+        
+        // Обработчик для клавиши Escape
+        this.form.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.clearAllErrors();
+                this.announceToScreenReader('Форма сброшена');
+            }
+        });
     }
     
     setupCharacterCounter() {
@@ -77,12 +106,22 @@ class ContactForm {
             } else {
                 this.charCount.style.color = '#28a745';
             }
+            
+            // Объявляем изменение для скринридера при приближении к лимиту
+            if (count === 900) {
+                this.announceToScreenReader('Внимание: осталось 100 символов до предела');
+            } else if (count === 950) {
+                this.announceToScreenReader('Внимание: осталось 50 символов до предела');
+            }
         }
     }
     
     handleSubmit(event) {
         event.preventDefault();
         console.log('Отправка улучшенной формы...');
+        
+        // Объявляем начало проверки формы
+        this.announceToScreenReader('Проверка формы перед отправкой');
         
         if (this.validateForm()) {
             this.submitForm();
@@ -109,6 +148,7 @@ class ContactForm {
     validateField(field) {
         const value = field.value.trim();
         const errorElement = document.getElementById(`${field.id}-error`);
+        const fieldLabel = field.previousElementSibling ? field.previousElementSibling.textContent.replace('*', '').trim() : 'поле';
         
         // Очищаем предыдущие ошибки
         this.clearError(field);
@@ -116,6 +156,7 @@ class ContactForm {
         // Проверяем обязательные поля
         if (field.hasAttribute('required') && !value) {
             this.showError(field, 'Это поле обязательно для заполнения');
+            this.announceToScreenReader(`Ошибка в поле ${fieldLabel}: поле обязательно для заполнения`);
             return false;
         }
         
@@ -124,6 +165,7 @@ class ContactForm {
             case 'email':
                 if (value && !this.isValidEmail(value)) {
                     this.showError(field, 'Введите корректный email адрес');
+                    this.announceToScreenReader(`Ошибка в поле ${fieldLabel}: введите корректный email адрес`);
                     return false;
                 }
                 break;
@@ -131,7 +173,9 @@ class ContactForm {
             case 'text':
             case 'textarea':
                 if (field.hasAttribute('minlength') && value.length < field.getAttribute('minlength')) {
-                    this.showError(field, `Минимальная длина: ${field.getAttribute('minlength')} символов`);
+                    const minLength = field.getAttribute('minlength');
+                    this.showError(field, `Минимальная длина: ${minLength} символов`);
+                    this.announceToScreenReader(`Ошибка в поле ${fieldLabel}: минимальная длина ${minLength} символов`);
                     return false;
                 }
                 break;
@@ -174,6 +218,12 @@ class ContactForm {
         field.removeAttribute('aria-describedby');
     }
     
+    clearAllErrors() {
+        Object.values(this.fields).forEach(field => {
+            if (field) this.clearError(field);
+        });
+    }
+    
     showFormErrors() {
         // Показываем общее сообщение об ошибках
         const submitButton = this.form.querySelector('.submit-btn');
@@ -182,16 +232,19 @@ class ContactForm {
         submitButton.querySelector('.btn-text').textContent = 'Исправьте ошибки в форме';
         submitButton.style.background = '#fd7e14';
         
-        setTimeout(() => {
-            submitButton.querySelector('.btn-text').textContent = originalText;
-            submitButton.style.background = '';
-        }, 3000);
+        // Объявляем ошибки для скринридера
+        this.announceToScreenReader('В форме обнаружены ошибки. Пожалуйста, исправьте их перед отправкой.');
         
         // Прокручиваем к первой ошибке
         const firstError = this.form.querySelector('[aria-invalid="true"]');
         if (firstError) {
             firstError.focus();
         }
+        
+        setTimeout(() => {
+            submitButton.querySelector('.btn-text').textContent = originalText;
+            submitButton.style.background = '';
+        }, 3000);
     }
     
     async submitForm() {
@@ -205,6 +258,9 @@ class ContactForm {
         btnLoading.style.display = 'inline';
         submitButton.disabled = true;
         
+        // Объявляем начало отправки
+        this.announceToScreenReader('Отправка сообщения, пожалуйста подождите');
+        
         try {
             // Имитируем отправку на сервер
             await this.simulateApiCall();
@@ -217,9 +273,13 @@ class ContactForm {
             this.updateCharCount();
             this.clearAllErrors();
             
+            // Объявляем успех
+            this.announceToScreenReader('Сообщение успешно отправлено! Я свяжусь с вами в ближайшее время.');
+            
         } catch (error) {
             console.error('Ошибка отправки:', error);
             this.showErrorModal();
+            this.announceToScreenReader('Ошибка при отправке сообщения. Пожалуйста, попробуйте еще раз.');
         } finally {
             // Восстанавливаем кнопку
             btnText.style.display = 'inline';
@@ -253,18 +313,12 @@ class ContactForm {
     showErrorModal() {
         alert('Произошла ошибка при отправке. Пожалуйста, попробуйте еще раз или свяжитесь со мной другим способом.');
     }
-    
-    clearAllErrors() {
-        Object.values(this.fields).forEach(field => {
-            if (field) this.clearError(field);
-        });
-    }
 }
 
 // Инициализируем форму
 new ContactForm();
 
-// Добавляем стили для улучшенной формы
+// Добавляем стили для улучшенной формы с доступностью
 const formStyles = `
     .error-message {
         color: #dc3545;
@@ -278,6 +332,22 @@ const formStyles = `
         font-size: 0.875rem;
         color: #6c757d;
         margin-top: 0.25rem;
+    }
+    
+    .required-asterisk {
+        color: #dc3545;
+    }
+    
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
     }
     
     .checkbox-label {
