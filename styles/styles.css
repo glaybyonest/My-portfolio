@@ -2960,3 +2960,206 @@ footer {
         border: 2px solid #000000;
     }
 }
+/* === ИСПРАВЛЕНИЯ ДЛЯ 100% ACCESSIBILITY === */
+
+/* Улучшение контрастности текста */
+.form-label,
+.help-text,
+.availability-note,
+.contact-details p,
+.contact-details small,
+.char-counter,
+.adaptive-text,
+.progress-table th,
+.progress-table td,
+.project-description,
+.course-description {
+    color: #2c2c2c !important;
+}
+
+/* Улучшение контрастности для темной темы */
+@media (prefers-color-scheme: dark) {
+    .form-label,
+    .help-text,
+    .availability-note,
+    .contact-details p,
+    .contact-details small,
+    .char-counter,
+    .adaptive-text,
+    .progress-table th,
+    .progress-table td,
+    .project-description,
+    .course-description {
+        color: #e2e8f0 !important;
+    }
+}
+
+/* Улучшение контрастности ссылок */
+.contact-details a {
+    color: #0056b3;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.contact-details a:hover,
+.contact-details a:focus {
+    color: #003d82;
+}
+
+/* Улучшение видимости фокуса */
+:focus-visible {
+    outline: 3px solid #0056b3 !important;
+    outline-offset: 3px !important;
+}
+
+/* Контрастные статусы */
+.status-dot.available {
+    background: #1e7e34 !important;
+}
+
+/* Улучшение контрастности placeholder */
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: #666 !important;
+    opacity: 1 !important;
+}
+
+/* Улучшение доступности таблиц */
+.progress-table th {
+    background: #f8f9fa;
+    color: #2c2c2c;
+    font-weight: 700;
+}
+
+.progress-table td {
+    color: #2c2c2c;
+}
+
+/* Улучшение доступности кнопок */
+.filter-btn,
+.download-btn,
+.submit-btn,
+.add-entry-btn,
+.action-btn {
+    position: relative;
+}
+
+.filter-btn:focus,
+.download-btn:focus,
+.submit-btn:focus,
+.add-entry-btn:focus,
+.action-btn:focus {
+    outline: 3px solid #0056b3 !important;
+    outline-offset: 2px !important;
+}
+
+/* Скрытие элементов только для скринридеров */
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* Улучшение контрастности иконок */
+.contact-icon {
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+}
+
+/* Улучшение доступности навигации */
+nav a {
+    position: relative;
+}
+
+nav a:focus {
+    outline: 3px solid #0056b3;
+    outline-offset: 2px;
+}
+
+/* Улучшение контрастности ошибок */
+.error-message {
+    color: #dc3545;
+    font-weight: 600;
+    background: #fff5f5;
+    padding: 0.5rem;
+    border-radius: 4px;
+    border-left: 3px solid #dc3545;
+}
+
+/* Улучшение доступности модальных окон */
+.project-modal-close:focus {
+    outline: 3px solid #0056b3;
+    outline-offset: 2px;
+}
+
+/* Улучшение контрастности для disabled состояний */
+.submit-btn:disabled {
+    background: #6c757d !important;
+    color: #fff !important;
+    opacity: 0.6;
+}
+
+/* Улучшение доступности для высокого контраста */
+@media (prefers-contrast: high) {
+    :root {
+        --primary-color: #000000;
+        --text-color: #000000;
+        --border-color: #000000;
+    }
+    
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+        outline: 3px solid #000000 !important;
+        border: 2px solid #000000 !important;
+    }
+    
+    nav a:focus,
+    .filter-btn:focus,
+    .download-btn:focus,
+    .submit-btn:focus {
+        outline: 3px solid #000000 !important;
+    }
+}
+
+/* Уважение к пользовательским настройкам движения */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Улучшение доступности для мобильных устройств */
+@media (max-width: 768px) {
+    .skip-link:focus {
+        top: 10px;
+        left: 10px;
+        background: #000;
+        color: #fff;
+        padding: 12px;
+        font-size: 16px;
+    }
+}
+
+/* Улучшение семантики визуального скрытия */
+.visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}

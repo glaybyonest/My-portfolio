@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="description" content="Контакты Сецкова Даниила для связи">
+    <meta name="description" content="Контакты Сецкова Даниила для связи по проектам и сотрудничеству">
     <title>Портфолио - Контакты</title>
     <link rel="stylesheet" href="../styles/styles.css">
 </head>
@@ -27,7 +27,7 @@
     </header>
 
     <main id="main-content" role="main">
-        <h1 class="sr-only">Контакты Сецкова Даниила</h1>
+        <h1 class="visually-hidden">Контакты Сецкова Даниила</h1>
         
         <section class="contacts" aria-labelledby="contacts-heading" role="region">
             <h2 id="contacts-heading" class="adaptive-heading">Свяжитесь со мной</h2>
@@ -57,19 +57,23 @@
                       aria-labelledby="contact-heading" 
                       novalidate
                       autocomplete="on"
+                      method="post"
                       role="form">
                     
-                    <fieldset class="form-fieldset" role="group">
-                        <legend id="contact-heading" class="form-legend" role="heading" aria-level="2">
+                    <fieldset class="form-fieldset" role="group" aria-describedby="form-instructions">
+                        <legend id="contact-heading" class="form-legend">
                             Форма обратной связи
-                            <span class="sr-only"> - все поля, отмеченные звёздочкой, обязательны для заполнения</span>
                         </legend>
+                        
+                        <p id="form-instructions" class="visually-hidden">
+                            Все поля, отмеченные звёздочкой, обязательны для заполнения. После отправки формы вы получите подтверждение по email.
+                        </p>
                         
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="name" class="form-label">
                                     Имя <span class="required-asterisk" aria-hidden="true">*</span>
-                                    <span class="sr-only">обязательное поле</span>
+                                    <span class="visually-hidden">обязательное поле</span>
                                 </label>
                                 <input type="text" id="name" name="name" required 
                                        placeholder="Введите ваше имя"
@@ -79,16 +83,16 @@
                                        minlength="2"
                                        maxlength="50"
                                        autocomplete="name">
-                                <div id="name-help" class="help-text" aria-live="polite">
+                                <div id="name-help" class="help-text">
                                     Введите ваше полное имя
                                 </div>
-                                <span class="error-message" id="name-error" aria-live="assertive"></span>
+                                <span class="error-message" id="name-error" role="alert" aria-live="assertive"></span>
                             </div>
                             
                             <div class="form-group">
                                 <label for="email" class="form-label">
                                     Email <span class="required-asterisk" aria-hidden="true">*</span>
-                                    <span class="sr-only">обязательное поле</span>
+                                    <span class="visually-hidden">обязательное поле</span>
                                 </label>
                                 <input type="email" id="email" name="email" required 
                                        placeholder="Введите ваш email"
@@ -97,10 +101,10 @@
                                        class="form-input scalable-element"
                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                                        autocomplete="email">
-                                <div id="email-help" class="help-text" aria-live="polite">
+                                <div id="email-help" class="help-text">
                                     Мы отправим ответ на этот адрес
                                 </div>
-                                <span class="error-message" id="email-error" aria-live="assertive"></span>
+                                <span class="error-message" id="email-error" role="alert" aria-live="assertive"></span>
                             </div>
                         </div>
                         
@@ -108,7 +112,7 @@
                             <div class="form-group">
                                 <label for="subject" class="form-label">
                                     Тема сообщения <span class="required-asterisk" aria-hidden="true">*</span>
-                                    <span class="sr-only">обязательное поле</span>
+                                    <span class="visually-hidden">обязательное поле</span>
                                 </label>
                                 <select id="subject" name="subject" required 
                                         class="form-select scalable-element" 
@@ -121,16 +125,16 @@
                                     <option value="question">Технический вопрос</option>
                                     <option value="other">Другое</option>
                                 </select>
-                                <div id="subject-help" class="help-text" aria-live="polite">
+                                <div id="subject-help" class="help-text">
                                     Выберите наиболее подходящую тему
                                 </div>
-                                <span class="error-message" id="subject-error" aria-live="assertive"></span>
+                                <span class="error-message" id="subject-error" role="alert" aria-live="assertive"></span>
                             </div>
                             
                             <div class="form-group">
                                 <label for="budget" class="form-label">
                                     Бюджет проекта
-                                    <span class="sr-only">(опционально)</span>
+                                    <span class="visually-hidden">(опционально)</span>
                                 </label>
                                 <select id="budget" name="budget" 
                                         class="form-select scalable-element"
@@ -141,7 +145,7 @@
                                     <option value="large">50,000 - 100,000 ₽</option>
                                     <option value="enterprise">Свыше 100,000 ₽</option>
                                 </select>
-                                <div id="budget-help" class="help-text" aria-live="polite">
+                                <div id="budget-help" class="help-text">
                                     Укажите бюджет для оценки проекта
                                 </div>
                             </div>
@@ -150,7 +154,7 @@
                         <div class="form-group full-width">
                             <label for="message" class="form-label">
                                 Сообщение <span class="required-asterisk" aria-hidden="true">*</span>
-                                <span class="sr-only">обязательное поле, минимальная длина 10 символов</span>
+                                <span class="visually-hidden">обязательное поле, минимальная длина 10 символов</span>
                             </label>
                             <textarea id="message" name="message" rows="6" required 
                                       placeholder="Опишите ваш проект или вопрос подробно (минимум 10 символов)"
@@ -164,10 +168,10 @@
                                     <span id="char-count">0</span>/1000 символов
                                 </span>
                             </div>
-                            <div id="message-help" class="help-text" aria-live="polite">
+                            <div id="message-help" class="help-text">
                                 Опишите вашу проблему или вопрос подробно
                             </div>
-                            <span class="error-message" id="message-error" aria-live="assertive"></span>
+                            <span class="error-message" id="message-error" role="alert" aria-live="assertive"></span>
                         </div>
 
                         <div class="form-actions">
@@ -186,12 +190,12 @@
 
             <section class="contact-info" aria-labelledby="contact-info-heading" role="region">
                 <h3 id="contact-info-heading" class="adaptive-heading">Мои контакты</h3>
-                <div class="contact-methods" role="list">
+                <div class="contact-methods" role="list" aria-label="Способы связи со мной">
                     <div class="contact-method scalable-element" role="listitem">
                         <span class="contact-icon" aria-hidden="true">📧</span>
                         <div class="contact-details">
                             <strong>Email</strong>
-                            <p>setskov.d.a@edu.ru</p>
+                            <p><a href="mailto:setskov.d.a@edu.ru" aria-label="Написать email на setskov.d.a@edu.ru">setskov.d.a@edu.ru</a></p>
                             <small>Отвечаю в течение 24 часов</small>
                         </div>
                     </div>
@@ -199,7 +203,7 @@
                         <span class="contact-icon" aria-hidden="true">🐙</span>
                         <div class="contact-details">
                             <strong>GitHub</strong>
-                            <p><a href="https://github.com/glaybyonest" target="_blank" rel="noopener" aria-label="Мой профиль на GitHub (откроется в новой вкладке)">Glaybyonest</a></p>
+                            <p><a href="https://github.com/glaybyonest" target="_blank" rel="noopener noreferrer" aria-label="Мой профиль на GitHub (откроется в новой вкладке)">Glaybyonest</a></p>
                             <small>Мои проекты и код</small>
                         </div>
                     </div>
@@ -226,7 +230,9 @@
     </main>
 
     <footer role="contentinfo">
-        <p>&copy; 2025 Сецков Даниил. Все права защищены.</p>
+        <div class="footer-content">
+            <p>&copy; 2025 Сецков Даниил. Все права защищены.</p>
+        </div>
     </footer>
 
     <script src="../scripts/modal-enhanced.js"></script>
