@@ -9,6 +9,9 @@ class EnhancedModal {
         this.focusableElements = [];
         this.firstFocusableElement = null;
         this.lastFocusableElement = null;
+        this.escapeHandler = null;
+        this.tabHandler = null;
+        this.clickHandler = null;
     }
     
     showSuccess(title, description) {
@@ -46,7 +49,6 @@ class EnhancedModal {
                     <div class="project-modal-header">
                         <h2 id="${titleId}" class="project-modal-title">${title}</h2>
                         <button class="project-modal-close" 
-                                onclick="enhancedModal.close()" 
                                 aria-label="Закрыть диалоговое окно"
                                 autofocus>
                             &times;
@@ -78,8 +80,7 @@ class EnhancedModal {
                     
                     <div class="project-modal-footer">
                         <div class="project-links">
-                            <button onclick="enhancedModal.close()" 
-                                    class="project-link demo-link"
+                            <button class="project-link demo-link"
                                     style="min-width: 200px; text-align: center;">
                                 Закрыть
                             </button>
@@ -91,6 +92,13 @@ class EnhancedModal {
         
         document.body.insertAdjacentHTML('beforeend', modalHTML);
         this.modal = document.getElementById(modalId);
+        
+        // Добавляем обработчики событий для кнопок
+        const closeButton = this.modal.querySelector('.project-modal-close');
+        const closeActionButton = this.modal.querySelector('.demo-link');
+        
+        closeButton.addEventListener('click', () => this.close());
+        closeActionButton.addEventListener('click', () => this.close());
     }
     
     setupAccessibility() {
@@ -126,7 +134,9 @@ class EnhancedModal {
     showBackgroundContent() {
         const hiddenElements = document.querySelectorAll('[aria-hidden="true"]');
         hiddenElements.forEach(el => {
-            el.removeAttribute('aria-hidden');
+            if (el.id !== 'enhanced-modal') {
+                el.removeAttribute('aria-hidden');
+            }
         });
     }
     
@@ -205,7 +215,9 @@ class EnhancedModal {
         }
         
         // Убираем обработчики
-        document.removeEventListener('keydown', this.escapeHandler);
+        if (this.escapeHandler) {
+            document.removeEventListener('keydown', this.escapeHandler);
+        }
         if (this.tabHandler) {
             this.modal?.removeEventListener('keydown', this.tabHandler);
         }
@@ -224,14 +236,16 @@ class EnhancedModal {
             liveRegion.id = 'a11y-announcements';
             liveRegion.setAttribute('aria-live', 'polite');
             liveRegion.setAttribute('aria-atomic', 'true');
-            liveRegion.className = 'sr-only';
+            liveRegion.className = 'visually-hidden';
             document.body.appendChild(liveRegion);
         }
         
         liveRegion.textContent = message;
         
         setTimeout(() => {
-            liveRegion.textContent = '';
+            if (liveRegion && liveRegion.textContent === message) {
+                liveRegion.textContent = '';
+            }
         }, 3000);
     }
 }

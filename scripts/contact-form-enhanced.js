@@ -32,11 +32,15 @@ class EnhancedContactForm {
     }
     
     createLiveRegion() {
+        // Удаляем старые регионы если есть
+        const oldRegion = document.getElementById('form-live-region');
+        if (oldRegion) oldRegion.remove();
+        
         this.liveRegion = document.createElement('div');
+        this.liveRegion.id = 'form-live-region';
         this.liveRegion.setAttribute('aria-live', 'assertive');
         this.liveRegion.setAttribute('aria-atomic', 'true');
-        this.liveRegion.className = 'sr-only';
-        this.liveRegion.id = 'form-live-region';
+        this.liveRegion.className = 'visually-hidden';
         document.body.appendChild(this.liveRegion);
     }
     
@@ -45,8 +49,11 @@ class EnhancedContactForm {
             this.liveRegion.setAttribute('aria-live', priority);
             this.liveRegion.textContent = message;
             
+            // Очищаем сообщение через 3 секунды
             setTimeout(() => {
-                this.liveRegion.textContent = '';
+                if (this.liveRegion) {
+                    this.liveRegion.textContent = '';
+                }
             }, 3000);
         }
     }
@@ -64,9 +71,6 @@ class EnhancedContactForm {
     }
     
     setupFocusManagement() {
-        // Захват фокуса в модальных окнах
-        this.setupModalFocusTrap();
-        
         // Управление фокусом при ошибках
         this.setupErrorFocusManagement();
     }
@@ -77,7 +81,9 @@ class EnhancedContactForm {
             e.preventDefault();
             const firstError = this.form.querySelector('[aria-invalid="true"]');
             if (firstError) {
-                firstError.focus();
+                setTimeout(() => {
+                    firstError.focus();
+                }, 100);
             }
         }, true);
     }
@@ -88,6 +94,12 @@ class EnhancedContactForm {
             if (e.key === 'Escape' && !this.isSubmitting) {
                 this.clearAllErrors();
                 this.announceToScreenReader('Форма сброшена. Все ошибки очищены.');
+            }
+            
+            // Ctrl + Enter для отправки формы
+            if (e.ctrlKey && e.key === 'Enter') {
+                e.preventDefault();
+                this.form.dispatchEvent(new Event('submit'));
             }
         });
     }
@@ -144,13 +156,16 @@ class EnhancedContactForm {
             // Меняем цвет при приближении к лимиту
             if (count > 900) {
                 this.charCount.style.color = '#dc3545';
+                this.charCount.style.fontWeight = 'bold';
                 if (count === 900) {
                     this.announceToScreenReader('Внимание: осталось 100 символов до предела', 'assertive');
                 }
             } else if (count > 700) {
                 this.charCount.style.color = '#fd7e14';
+                this.charCount.style.fontWeight = '600';
             } else {
                 this.charCount.style.color = '#28a745';
+                this.charCount.style.fontWeight = 'normal';
             }
         }
     }
@@ -219,7 +234,7 @@ class EnhancedContactForm {
                 
             case 'text':
             case 'textarea':
-                if (field.hasAttribute('minlength') && value.length < field.getAttribute('minlength')) {
+                if (field.hasAttribute('minlength') && value.length < parseInt(field.getAttribute('minlength'))) {
                     const minLength = field.getAttribute('minlength');
                     this.showError(field, `Минимальная длина: ${minLength} символов`);
                     this.announceToScreenReader(`Ошибка в поле ${fieldLabel}: минимальная длина ${minLength} символов`, 'assertive');
@@ -240,7 +255,7 @@ class EnhancedContactForm {
     }
     
     isValidEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         return re.test(email);
     }
     
@@ -252,6 +267,7 @@ class EnhancedContactForm {
         if (errorElement) {
             errorElement.textContent = message;
             errorElement.style.display = 'block';
+            errorElement.setAttribute('role', 'alert');
         }
         
         // Добавляем ARIA-атрибуты для доступности
@@ -267,6 +283,7 @@ class EnhancedContactForm {
         if (errorElement) {
             errorElement.textContent = '';
             errorElement.style.display = 'none';
+            errorElement.removeAttribute('role');
         }
         
         field.removeAttribute('aria-invalid');
@@ -311,7 +328,7 @@ class EnhancedContactForm {
         
         // Показываем индикатор загрузки
         btnText.style.display = 'none';
-        btnLoading.style.display = 'inline';
+        btnLoading.style.display = 'inline-flex';
         submitButton.disabled = true;
         submitButton.setAttribute('aria-label', 'Отправка сообщения, пожалуйста подождите');
         
@@ -351,133 +368,24 @@ class EnhancedContactForm {
     }
     
     showEnhancedSuccessModal() {
-        if (typeof showEnhancedSuccessModal === 'function') {
-            showEnhancedSuccessModal();
+        if (typeof window.showEnhancedSuccessModal === 'function') {
+            window.showEnhancedSuccessModal();
+        } else if (window.enhancedModal) {
+            window.enhancedModal.showSuccess('Сообщение успешно отправлено!', 'Я свяжусь с вами в ближайшее время.');
         } else {
-            // Фолбэк - используем улучшенное модальное окно
-            const modal = new EnhancedModal();
-            modal.showSuccess('Сообщение успешно отправлено!', 'Я свяжусь с вами в ближайшее время.');
+            // Фолбэк - обычное сообщение
+            alert('Сообщение успешно отправлено! Я свяжусь с вами в ближайшее время.');
         }
     }
     
     showEnhancedErrorModal() {
-        const modal = new EnhancedModal();
-        modal.showError('Ошибка отправки', 'Произошла ошибка при отправке. Пожалуйста, попробуйте еще раз или свяжитесь со мной другим способом.');
+        if (window.enhancedModal) {
+            window.enhancedModal.showError('Ошибка отправки', 'Произошла ошибка при отправке. Пожалуйста, попробуйте еще раз или свяжитесь со мной другим способом.');
+        } else {
+            alert('Ошибка при отправке. Пожалуйста, попробуйте еще раз.');
+        }
     }
 }
 
 // Инициализируем улучшенную форму
 new EnhancedContactForm();
-
-// Добавляем стили для улучшенной доступности
-const enhancedFormStyles = `
-    .help-text {
-        font-size: 0.875rem;
-        color: #6c757d;
-        margin-top: 0.25rem;
-        display: block;
-    }
-    
-    .error-message {
-        color: #dc3545;
-        font-size: 0.875rem;
-        margin-top: 0.25rem;
-        display: none;
-    }
-    
-    .char-counter {
-        text-align: right;
-        font-size: 0.875rem;
-        color: #6c757d;
-        margin-top: 0.25rem;
-    }
-    
-    .required-asterisk {
-        color: #dc3545;
-    }
-    
-    .sr-only {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border: 0;
-    }
-    
-    .contact-hero {
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-        gap: 2rem;
-        margin-bottom: 3rem;
-        align-items: center;
-    }
-    
-    .contact-intro {
-        background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
-        padding: 2rem;
-        border-radius: 12px;
-        border-left: 4px solid #dc3545;
-    }
-    
-    .availability {
-        background: #f8f9fa;
-        padding: 1.5rem;
-        border-radius: 8px;
-        margin-top: 2rem;
-        border: 1px solid #e9ecef;
-    }
-    
-    .availability-status {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin-bottom: 0.5rem;
-    }
-    
-    .status-dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-    }
-    
-    .status-dot.available {
-        background: #28a745;
-        animation: pulse 2s infinite;
-    }
-    
-    .availability-note {
-        color: #555;
-        font-size: 0.9rem;
-        margin: 0;
-    }
-    
-    @keyframes pulse {
-        0% { opacity: 1; }
-        50% { opacity: 0.5; }
-        100% { opacity: 1; }
-    }
-    
-    /* Адаптивность для контактной страницы */
-    @media (max-width: 768px) {
-        .contact-hero {
-            grid-template-columns: 1fr;
-            text-align: center;
-        }
-        
-        .contact-illustration {
-            order: -1;
-        }
-    }
-`;
-
-// Добавляем стили в документ
-if (!document.getElementById('enhanced-form-styles')) {
-    const styleSheet = document.createElement('style');
-    styleSheet.id = 'enhanced-form-styles';
-    styleSheet.textContent = enhancedFormStyles;
-    document.head.appendChild(styleSheet);
-}
